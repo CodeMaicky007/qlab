@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -10,9 +11,9 @@ export default function Home() {
           QLab
         </span>
         <ul className="flex gap-8 text-[13px] text-[#6B6B67] tracking-wide list-none">
-          <li className="cursor-pointer hover:text-[#1A1A18] transition-colors">Work</li>
-          <li className="cursor-pointer hover:text-[#1A1A18] transition-colors">About</li>
-          <li className="cursor-pointer hover:text-[#1A1A18] transition-colors">Contact</li>
+          <li><Link href="/work" className="hover:text-[#1A1A18] transition-colors text-[#6B6B67] no-underline">Work</Link></li>
+          <li><Link href="/about" className="hover:text-[#1A1A18] transition-colors text-[#6B6B67] no-underline">About</Link></li>
+          <li><Link href="/contact" className="hover:text-[#1A1A18] transition-colors text-[#6B6B67] no-underline">Contact</Link></li>
         </ul>
       </nav>
 
@@ -28,7 +29,7 @@ export default function Home() {
         </div>
         <div className="rounded-md aspect-video overflow-hidden relative">
           <video
-            src="/IA/videos/Movie.mov"
+            src="/IA/videos/showreel.mp4"
             autoPlay
             muted
             loop
@@ -55,7 +56,7 @@ export default function Home() {
             { title: "Carson", year: "2025 · Character", img: "/IA/Carson.png" },
             { title: "Tuto", year: "2025 · Portrait", img: "/IA/Tuto.png" },
           ].map((project) => (
-            <div key={project.title} className="cursor-pointer group">
+            <Link href="/work" key={project.title} className="cursor-pointer group no-underline">
               <div className="aspect-[4/3] rounded overflow-hidden relative">
                 <Image
                   src={project.img}
@@ -65,10 +66,10 @@ export default function Home() {
                 />
               </div>
               <div className="pt-3">
-                <p className="text-[13px] font-normal">{project.title}</p>
+                <p className="text-[13px] font-normal text-[#1A1A18]">{project.title}</p>
                 <p className="text-[11px] text-[#A8A8A4] tracking-wide">{project.year}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
