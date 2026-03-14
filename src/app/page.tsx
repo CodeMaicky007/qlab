@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Home() {
   return (
     <main className="min-h-screen font-[family-name:var(--font-dm-sans)]">
@@ -24,11 +26,16 @@ export default function Home() {
             Visual storytelling · AI Production
           </p>
         </div>
-        <div className="bg-[#F0EEE9] rounded-md aspect-video flex items-center justify-center relative group cursor-pointer hover:bg-[#E5E3DD] transition-colors">
-          <div className="w-11 h-11 rounded-full border border-[#1A1A18]/25 flex items-center justify-center">
-            <div className="w-0 h-0 border-t-[7px] border-t-transparent border-b-[7px] border-b-transparent border-l-[12px] border-l-[#6B6B67] ml-1" />
-          </div>
-          <span className="absolute bottom-4 left-4 text-[11px] tracking-widest text-[#A8A8A4] uppercase">
+        <div className="rounded-md aspect-video overflow-hidden relative">
+          <video
+            src="/IA/videos/Movie.mov"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          />
+          <span className="absolute bottom-4 left-4 text-[11px] tracking-widest text-white/60 uppercase">
             Showreel 2025
           </span>
         </div>
@@ -44,13 +51,18 @@ export default function Home() {
         </p>
         <div className="grid grid-cols-3 gap-4">
           {[
-            { title: "The Void", year: "2025 · Short film", w: "60%" },
-            { title: "Golf Course", year: "2025 · Cinematic", w: "30%" },
-            { title: "Project 03", year: "2025 · Upcoming", w: "45%" },
+            { title: "Golf Course", year: "2025 · Cinematic", img: "/IA/TutoyFrancesco.jpeg" },
+            { title: "Carson", year: "2025 · Character", img: "/IA/Carson.png" },
+            { title: "Tuto", year: "2025 · Portrait", img: "/IA/Tuto.png" },
           ].map((project) => (
             <div key={project.title} className="cursor-pointer group">
-              <div className="aspect-[4/3] bg-[#F0EEE9] rounded group-hover:bg-[#E5E3DD] transition-colors flex items-center justify-center">
-                <div className="h-px bg-[#1A1A18]/25" style={{ width: project.w }} />
+              <div className="aspect-[4/3] rounded overflow-hidden relative">
+                <Image
+                  src={project.img}
+                  alt={project.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
               </div>
               <div className="pt-3">
                 <p className="text-[13px] font-normal">{project.title}</p>
