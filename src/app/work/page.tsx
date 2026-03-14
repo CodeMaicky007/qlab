@@ -172,18 +172,6 @@ export default function Work() {
   return (
     <main className="min-h-screen font-[family-name:var(--font-dm-sans)] bg-[#0D0D0D] text-white">
 
-      {/* Nav */}
-      <nav className="flex justify-between items-center px-10 py-7 border-b border-white/10">
-        <Link href="/" className="font-[family-name:var(--font-cormorant)] text-xl font-light tracking-widest no-underline text-white">
-          QLab
-        </Link>
-        <ul className="flex gap-8 text-[13px] tracking-wide list-none">
-          <li><Link href="/work" className="text-white no-underline">Work</Link></li>
-          <li><Link href="/about" className="hover:text-white transition-colors no-underline text-white/40">About</Link></li>
-          <li><Link href="/contact" className="hover:text-white transition-colors no-underline text-white/40">Contact</Link></li>
-        </ul>
-      </nav>
-
       {/* Header */}
       <div className="px-10 pt-16 pb-12 border-b border-white/10">
         <motion.p

@@ -4,18 +4,6 @@ export default function About() {
   return (
     <main className="min-h-screen font-[family-name:var(--font-dm-sans)]">
 
-      {/* Nav */}
-      <nav className="flex justify-between items-center px-10 py-7 border-b border-[#1A1A18]/10">
-        <Link href="/" className="font-[family-name:var(--font-cormorant)] text-xl font-light tracking-widest no-underline text-[#1A1A18]">
-          QLab
-        </Link>
-        <ul className="flex gap-8 text-[13px] text-[#6B6B67] tracking-wide list-none">
-          <li><Link href="/work" className="hover:text-[#1A1A18] transition-colors text-[#6B6B67] no-underline">Work</Link></li>
-          <li><Link href="/about" className="text-[#1A1A18] no-underline">About</Link></li>
-          <li><Link href="/contact" className="hover:text-[#1A1A18] transition-colors text-[#6B6B67] no-underline">Contact</Link></li>
-        </ul>
-      </nav>
-
       {/* Hero */}
       <div className="px-10 pt-16 pb-12 border-b border-[#1A1A18]/10 grid grid-cols-2 gap-16 items-end">
         <div>

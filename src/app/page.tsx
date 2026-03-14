@@ -43,9 +43,7 @@ export default function Home() {
     const gap = 10;
     const curve = 15;
 
-    function getWidth(gap: number) {
-      return 1 + gap / 100;
-    }
+    function getWidth(gap: number) { return 1 + gap / 100; }
 
     function getPlaneWidth(el: HTMLElement, camera: THREE.PerspectiveCamera) {
       const vFov = (camera.fov * Math.PI) / 180;
@@ -80,10 +78,7 @@ export default function Home() {
       const loader = new THREE.TextureLoader();
       loader.load(image, (texture) => {
         const material = new THREE.ShaderMaterial({
-          uniforms: {
-            tex: { value: texture },
-            curve: { value: curve },
-          },
+          uniforms: { tex: { value: texture }, curve: { value: curve } },
           transparent: true,
           vertexShader: `
             uniform float curve;
@@ -154,12 +149,12 @@ export default function Home() {
   return (
     <main className="font-[family-name:var(--font-dm-sans)]" style={{ minHeight: "200vh" }}>
 
-      {/* Nav */}
-      <nav className="flex justify-between items-center px-10 py-7 border-b border-[#1A1A18]/10">
+      {/* Nav flotante */}
+      <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex justify-between items-center px-6 py-3 bg-white/60 backdrop-blur-xl border border-white/40 rounded-full shadow-sm w-[90%] max-w-2xl">
         <span className="font-[family-name:var(--font-cormorant)] text-xl font-light tracking-widest">
           QLab
         </span>
-        <ul className="flex gap-8 text-[13px] text-[#6B6B67] tracking-wide list-none">
+        <ul className="flex gap-6 text-[13px] text-[#6B6B67] tracking-wide list-none">
           <li><Link href="/work" className="hover:text-[#1A1A18] transition-colors text-[#6B6B67] no-underline">Work</Link></li>
           <li><Link href="/about" className="hover:text-[#1A1A18] transition-colors text-[#6B6B67] no-underline">About</Link></li>
           <li><Link href="/contact" className="hover:text-[#1A1A18] transition-colors text-[#6B6B67] no-underline">Contact</Link></li>
@@ -167,7 +162,7 @@ export default function Home() {
       </nav>
 
       {/* Hero */}
-      <section className="flex flex-col items-center justify-center text-center px-10 pt-16 pb-4">
+      <section className="flex flex-col items-center justify-center text-center px-10 pt-32 pb-4">
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
