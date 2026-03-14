@@ -15,6 +15,24 @@ const gallery = [
   "/IA/Tuto.png",
 ];
 
+const proceso = [
+  { num: "01", title: "Concepto", desc: "Definimos la narrativa, los personajes y el universo visual del proyecto." },
+  { num: "02", title: "Generación", desc: "Producimos los assets visuales con modelos de IA — imágenes, voces y movimiento." },
+  { num: "03", title: "Edición", desc: "Montamos, colorizamos y sincronizamos en DaVinci Resolve con técnicas cinematográficas." },
+  { num: "04", title: "Entrega", desc: "Exportamos en la resolución y formato adecuados para cada plataforma." },
+];
+
+const herramientas = [
+  { name: "Kling 3", category: "Generación de video" },
+  { name: "ElevenLabs", category: "Síntesis de voz" },
+  { name: "Sync.so", category: "Lip sync" },
+  { name: "DaVinci Resolve", category: "Edición & color" },
+  { name: "Higgsfield Cinema", category: "IA cinematográfica" },
+  { name: "Claude AI", category: "Narrativa & código" },
+  { name: "Framer", category: "Diseño web" },
+  { name: "Next.js", category: "Desarrollo web" },
+];
+
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -66,6 +84,7 @@ export default function Home() {
             tex: { value: texture },
             curve: { value: curve },
           },
+          transparent: true,
           vertexShader: `
             uniform float curve;
             varying vec2 vertexUV;
@@ -78,18 +97,18 @@ export default function Home() {
             }
           `,
           fragmentShader: `
-          uniform sampler2D tex;
-          varying vec2 vertexUV;
-          void main(){
-            vec2 uv = vertexUV;
-            float radius = 0.06;
-            vec2 d = abs(uv - 0.5) - (0.5 - radius);
-            float dist = length(max(d, 0.0)) - radius;
-            float alpha = 1.0 - smoothstep(-0.005, 0.005, dist);
-            vec4 color = texture2D(tex, uv);
-            gl_FragColor = vec4(color.rgb, color.a * alpha);
-          }
-        `,
+            uniform sampler2D tex;
+            varying vec2 vertexUV;
+            void main(){
+              vec2 uv = vertexUV;
+              float radius = 0.06;
+              vec2 d = abs(uv - 0.5) - (0.5 - radius);
+              float dist = length(max(d, 0.0)) - radius;
+              float alpha = 1.0 - smoothstep(-0.005, 0.005, dist);
+              vec4 color = texture2D(tex, uv);
+              gl_FragColor = vec4(color.rgb, color.a * alpha);
+            }
+          `,
         });
 
         const mesh = new THREE.Mesh(geometry, material);
@@ -190,9 +209,62 @@ export default function Home() {
       {/* Canvas Three.js */}
       <div
         ref={containerRef}
-        className="w-full sticky top-0"
+        className="w-full "
         style={{ height: "70vh", overflow: "visible" }}
       />
+
+      {/* Proceso */}
+      <section className="px-10 py-20 border-t border-[#1A1A18]/10">
+        <div className="flex justify-between items-end mb-16">
+          <div>
+            <p className="text-[11px] tracking-widest uppercase text-[#A8A8A4] mb-3">Cómo trabajamos</p>
+            <h2 className="font-[family-name:var(--font-cormorant)] text-[42px] font-light leading-[1.1]">
+              El <em>proceso</em>
+            </h2>
+          </div>
+        </div>
+        <div className="grid grid-cols-4 gap-8">
+          {proceso.map((step, i) => (
+            <motion.div
+              key={step.num}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              viewport={{ once: true }}
+              className="border-t border-[#1A1A18]/10 pt-6"
+            >
+              <p className="text-[11px] tracking-widest text-[#A8A8A4] mb-4">{step.num}</p>
+              <h3 className="font-[family-name:var(--font-cormorant)] text-[24px] font-light mb-3">{step.title}</h3>
+              <p className="text-[12px] text-[#6B6B67] leading-relaxed">{step.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Herramientas */}
+      <section className="px-10 py-20 border-t border-[#1A1A18]/10">
+        <div className="mb-16">
+          <p className="text-[11px] tracking-widest uppercase text-[#A8A8A4] mb-3">Stack tecnológico</p>
+          <h2 className="font-[family-name:var(--font-cormorant)] text-[42px] font-light leading-[1.1]">
+            <em>Herramientas</em>
+          </h2>
+        </div>
+        <div className="grid grid-cols-4 gap-4">
+          {herramientas.map((tool, i) => (
+            <motion.div
+              key={tool.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              viewport={{ once: true }}
+              className="border border-[#1A1A18]/10 rounded-lg px-6 py-5 hover:border-[#1A1A18]/30 transition-colors"
+            >
+              <p className="text-[14px] font-normal mb-1">{tool.name}</p>
+              <p className="text-[11px] text-[#A8A8A4] tracking-wide">{tool.category}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
 
       {/* Footer */}
       <footer className="px-10 py-7 border-t border-[#1A1A18]/10 flex justify-between items-center">
