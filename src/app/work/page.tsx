@@ -49,13 +49,20 @@ function VideoCard({ project, index }: { project: typeof projects[0]; index: num
 
   const handleMouseEnter = () => {
     setHovered(true);
-    videoRef.current?.play();
+    if (videoRef.current) {
+      videoRef.current.muted = false;
+      videoRef.current.volume = 0.8;
+      videoRef.current.play();
+    }
     setPlaying(true);
   };
 
   const handleMouseLeave = () => {
     setHovered(false);
-    videoRef.current?.pause();
+    if (videoRef.current) {
+      videoRef.current.muted = true;
+      videoRef.current.pause();
+    }
     setPlaying(false);
   };
 
