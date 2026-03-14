@@ -1,9 +1,139 @@
-import Image from "next/image";
+"use client";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import * as THREE from "three";
+
+const gallery = [
+  "/IA/TutoyFrancesco.jpeg",
+  "/IA/Carson.png",
+  "/IA/Tuto.png",
+  "/IA/Francesco.png",
+  "/IA/Cesar.png",
+  "/IA/TutoyFrancesco.jpeg",
+  "/IA/Carson.png",
+  "/IA/Tuto.png",
+];
 
 export default function Home() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const gap = 10;
+    const curve = 15;
+
+    function getWidth(gap: number) {
+      return 1 + gap / 100;
+    }
+
+    function getPlaneWidth(el: HTMLElement, camera: THREE.PerspectiveCamera) {
+      const vFov = (camera.fov * Math.PI) / 180;
+      const height = 2 * Math.tan(vFov / 2) * camera.position.z;
+      const aspect = el.clientWidth / el.clientHeight;
+      const width = height * aspect;
+      return el.clientWidth / width;
+    }
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, el.clientWidth / el.clientHeight, 0.1, 20);
+    camera.position.z = 1.2;
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(el.clientWidth, el.clientHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    el.appendChild(renderer.domElement);
+
+    const geometry = new THREE.PlaneGeometry(1, 0.65, 20, 20);
+    const planeSpace = getPlaneWidth(el, camera) * getWidth(gap);
+    const totalImage = Math.ceil(el.clientWidth / planeSpace) + 1 + gallery.length;
+    const initialOffset = Math.ceil(el.clientWidth / (2 * planeSpace) - 0.5);
+
+    const allImages: string[] = [...gallery];
+    for (let i = gallery.length; i < totalImage; i++) {
+      allImages.push(gallery[i % gallery.length]);
+    }
+
+    const planes: THREE.Mesh[] = [];
+
+    allImages.forEach((image, i) => {
+      const loader = new THREE.TextureLoader();
+      loader.load(image, (texture) => {
+        const material = new THREE.ShaderMaterial({
+          uniforms: {
+            tex: { value: texture },
+            curve: { value: curve },
+          },
+          vertexShader: `
+            uniform float curve;
+            varying vec2 vertexUV;
+            void main(){
+              vertexUV = uv;
+              vec3 newPosition = position;
+              float distanceFromCenter = abs(modelMatrix*vec4(position, 1.0)).x;
+              newPosition.y *= 1.0 + (curve/100.0)*pow(distanceFromCenter,2.0);
+              gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
+            }
+          `,
+          fragmentShader: `
+          uniform sampler2D tex;
+          varying vec2 vertexUV;
+          void main(){
+            vec2 uv = vertexUV;
+            float radius = 0.06;
+            vec2 d = abs(uv - 0.5) - (0.5 - radius);
+            float dist = length(max(d, 0.0)) - radius;
+            float alpha = 1.0 - smoothstep(-0.005, 0.005, dist);
+            vec4 color = texture2D(tex, uv);
+            gl_FragColor = vec4(color.rgb, color.a * alpha);
+          }
+        `,
+        });
+
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.position.x = -1 * (i - initialOffset) * getWidth(gap);
+        mesh.frustumCulled = false;
+        planes.push(mesh);
+        scene.add(mesh);
+      });
+    });
+
+    let previousScrollY = window.scrollY;
+    let smoothedScroll = window.scrollY;
+    let rafId: number;
+
+    const animate = () => {
+      smoothedScroll += (window.scrollY - smoothedScroll) * 0.1;
+      const scrollDelta = smoothedScroll - previousScrollY;
+      const direction = scrollDelta > 0 ? 1 : -1;
+      const deltaAmount = Math.abs(scrollDelta) * 0.01;
+      const planeWidth = getWidth(gap);
+      const loopWidth = planeWidth * planes.length;
+
+      planes.forEach((plane) => {
+        plane.position.x += direction * deltaAmount;
+        if (plane.position.x > loopWidth / 2) plane.position.x -= loopWidth;
+        else if (plane.position.x < -loopWidth / 2) plane.position.x += loopWidth;
+      });
+
+      previousScrollY = smoothedScroll;
+      renderer.render(scene, camera);
+      rafId = requestAnimationFrame(animate);
+    };
+
+    rafId = requestAnimationFrame(animate);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      renderer.dispose();
+      if (el.contains(renderer.domElement)) el.removeChild(renderer.domElement);
+    };
+  }, []);
+
   return (
-    <main className="min-h-screen font-[family-name:var(--font-dm-sans)]">
+    <main className="font-[family-name:var(--font-dm-sans)]" style={{ minHeight: "200vh" }}>
 
       {/* Nav */}
       <nav className="flex justify-between items-center px-10 py-7 border-b border-[#1A1A18]/10">
@@ -18,61 +148,51 @@ export default function Home() {
       </nav>
 
       {/* Hero */}
-      <section className="grid grid-cols-2 gap-10 px-10 pt-20 pb-16 items-end">
-        <div>
-          <h1 className="font-[family-name:var(--font-cormorant)] text-[62px] font-light leading-[1.08] mb-6">
-            Cinematic<br /><em>AI</em><br />Studio
-          </h1>
-          <p className="text-[12px] text-[#6B6B67] tracking-widest uppercase">
-            Visual storytelling · AI Production
-          </p>
-        </div>
-        <div className="rounded-md aspect-video overflow-hidden relative">
-          <video
-            src="/IA/videos/showreel.mp4"
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-          />
-          <span className="absolute bottom-4 left-4 text-[11px] tracking-widest text-white/60 uppercase">
-            Showreel 2025
-          </span>
-        </div>
+      <section className="flex flex-col items-center justify-center text-center px-10 pt-16 pb-4">
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-[11px] tracking-widest uppercase text-[#A8A8A4] mb-4"
+        >
+          Visual storytelling · AI Production
+        </motion.p>
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="font-[family-name:var(--font-cormorant)] text-[80px] font-light leading-[1.0] mb-4"
+        >
+          Cinematic <em>AI</em> Studio
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="text-[13px] text-[#6B6B67] max-w-md leading-relaxed mb-8"
+        >
+          QLab produce contenido cinematográfico con inteligencia artificial.
+        </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+        >
+          <Link
+            href="/work"
+            className="text-[12px] tracking-widest uppercase text-[#1A1A18] border border-[#1A1A18]/30 px-8 py-3 rounded-full hover:bg-[#1A1A18] hover:text-white transition-all duration-300 no-underline"
+          >
+            Ver proyectos
+          </Link>
+        </motion.div>
       </section>
 
-      {/* Divider */}
-      <div className="mx-10 h-px bg-[#1A1A18]/10" />
-
-      {/* Works */}
-      <section className="px-10 py-12">
-        <p className="text-[11px] tracking-widest uppercase text-[#A8A8A4] mb-8">
-          Selected work
-        </p>
-        <div className="grid grid-cols-3 gap-4">
-          {[
-            { title: "Golf Course", year: "2025 · Cinematic", img: "/IA/TutoyFrancesco.jpeg" },
-            { title: "Carson", year: "2025 · Character", img: "/IA/Carson.png" },
-            { title: "Tuto", year: "2025 · Portrait", img: "/IA/Tuto.png" },
-          ].map((project) => (
-            <Link href="/work" key={project.title} className="cursor-pointer group no-underline">
-              <div className="aspect-[4/3] rounded overflow-hidden relative">
-                <Image
-                  src={project.img}
-                  alt={project.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="pt-3">
-                <p className="text-[13px] font-normal text-[#1A1A18]">{project.title}</p>
-                <p className="text-[11px] text-[#A8A8A4] tracking-wide">{project.year}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
+      {/* Canvas Three.js */}
+      <div
+        ref={containerRef}
+        className="w-full sticky top-0"
+        style={{ height: "70vh", overflow: "visible" }}
+      />
 
       {/* Footer */}
       <footer className="px-10 py-7 border-t border-[#1A1A18]/10 flex justify-between items-center">
