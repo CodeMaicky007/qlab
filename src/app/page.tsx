@@ -209,7 +209,7 @@ export default function Home() {
       {/* Canvas Three.js */}
       <div
         ref={containerRef}
-        className="w-full "
+        className="w-full relative"
         style={{ height: "70vh", overflow: "visible" }}
       />
 
