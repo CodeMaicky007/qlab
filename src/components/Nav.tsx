@@ -1,18 +1,15 @@
 "use client";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 
 export default function Nav() {
   const pathname = usePathname();
-
   const isWork = pathname === "/work";
   const isDark = isWork;
 
   return (
     <nav className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 flex justify-between items-center px-6 py-3 backdrop-blur-xl border rounded-full shadow-sm w-[90%] max-w-2xl ${
-      isDark
-        ? "bg-black/40 border-white/20"
-        : "bg-white/60 border-white/40"
+      isDark ? "bg-black/40 border-white/20" : "bg-white/60 border-white/40"
     }`}>
       <Link
         href="/"
