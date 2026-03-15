@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
+import ThemeToggle from "@/components/ThemeToggle";
+import ThemeProvider from "@/components/ThemeProvider";
+import { ViewTransitions } from "next-view-transitions";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -27,11 +30,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${cormorant.variable} ${dmSans.variable} font-sans bg-[#FAFAF8] text-[#1A1A18]`}>
-        <Nav />
-        {children}
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang="en" suppressHydrationWarning>
+        <body className={`${cormorant.variable} ${dmSans.variable} font-sans bg-[#FAFAF8] text-[#1A1A18] dark:bg-[#0D0D0D] dark:text-white`}>
+          <ThemeProvider>
+            <Nav />
+            <ThemeToggle />
+            {children}
+          </ThemeProvider>
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

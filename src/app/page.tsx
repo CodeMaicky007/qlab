@@ -147,19 +147,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="font-[family-name:var(--font-dm-sans)]" style={{ minHeight: "200vh" }}>
-
-      {/* Nav flotante */}
-      <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex justify-between items-center px-6 py-3 bg-white/60 backdrop-blur-xl border border-white/40 rounded-full shadow-sm w-[90%] max-w-2xl">
-        <span className="font-[family-name:var(--font-cormorant)] text-xl font-light tracking-widest">
-          QLab
-        </span>
-        <ul className="flex gap-6 text-[13px] text-[#6B6B67] tracking-wide list-none">
-          <li><Link href="/work" className="hover:text-[#1A1A18] transition-colors text-[#6B6B67] no-underline">Work</Link></li>
-          <li><Link href="/about" className="hover:text-[#1A1A18] transition-colors text-[#6B6B67] no-underline">About</Link></li>
-          <li><Link href="/contact" className="hover:text-[#1A1A18] transition-colors text-[#6B6B67] no-underline">Contact</Link></li>
-        </ul>
-      </nav>
+    <main className="font-[family-name:var(--font-dm-sans)] bg-[#FAFAF8] dark:bg-[#0D0D0D] transition-colors duration-300" style={{ minHeight: "200vh" }}>
 
       {/* Hero */}
       <section className="flex flex-col items-center justify-center text-center px-10 pt-32 pb-4">
@@ -175,7 +163,7 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="font-[family-name:var(--font-cormorant)] text-[80px] font-light leading-[1.0] mb-4"
+          className="font-[family-name:var(--font-cormorant)] text-[80px] font-light leading-[1.0] mb-4 text-[#1A1A18] dark:text-white"
         >
           Cinematic <em>AI</em> Studio
         </motion.h1>
@@ -183,7 +171,7 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-[13px] text-[#6B6B67] max-w-md leading-relaxed mb-8"
+          className="text-[13px] text-[#6B6B67] dark:text-white/50 max-w-md leading-relaxed mb-8"
         >
           QLab produce contenido cinematográfico con inteligencia artificial.
         </motion.p>
@@ -194,7 +182,7 @@ export default function Home() {
         >
           <Link
             href="/work"
-            className="text-[12px] tracking-widest uppercase text-[#1A1A18] border border-[#1A1A18]/30 px-8 py-3 rounded-full hover:bg-[#1A1A18] hover:text-white transition-all duration-300 no-underline"
+            className="text-[12px] tracking-widest uppercase text-[#1A1A18] dark:text-white border border-[#1A1A18]/30 dark:border-white/30 px-8 py-3 rounded-full hover:bg-[#1A1A18] dark:hover:bg-white hover:text-white dark:hover:text-[#0D0D0D] transition-all duration-300 no-underline"
           >
             Ver proyectos
           </Link>
@@ -209,11 +197,11 @@ export default function Home() {
       />
 
       {/* Proceso */}
-      <section className="px-10 py-20 border-t border-[#1A1A18]/10">
+      <section className="px-10 py-20 border-t border-[#1A1A18]/10 dark:border-white/10">
         <div className="flex justify-between items-end mb-16">
           <div>
             <p className="text-[11px] tracking-widest uppercase text-[#A8A8A4] mb-3">Cómo trabajamos</p>
-            <h2 className="font-[family-name:var(--font-cormorant)] text-[42px] font-light leading-[1.1]">
+            <h2 className="font-[family-name:var(--font-cormorant)] text-[42px] font-light leading-[1.1] text-[#1A1A18] dark:text-white">
               El <em>proceso</em>
             </h2>
           </div>
@@ -226,21 +214,21 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
               viewport={{ once: true }}
-              className="border-t border-[#1A1A18]/10 pt-6"
+              className="border-t border-[#1A1A18]/10 dark:border-white/10 pt-6"
             >
               <p className="text-[11px] tracking-widest text-[#A8A8A4] mb-4">{step.num}</p>
-              <h3 className="font-[family-name:var(--font-cormorant)] text-[24px] font-light mb-3">{step.title}</h3>
-              <p className="text-[12px] text-[#6B6B67] leading-relaxed">{step.desc}</p>
+              <h3 className="font-[family-name:var(--font-cormorant)] text-[24px] font-light mb-3 text-[#1A1A18] dark:text-white">{step.title}</h3>
+              <p className="text-[12px] text-[#6B6B67] dark:text-white/50 leading-relaxed">{step.desc}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
       {/* Herramientas */}
-      <section className="px-10 py-20 border-t border-[#1A1A18]/10">
+      <section className="px-10 py-20 border-t border-[#1A1A18]/10 dark:border-white/10">
         <div className="mb-16">
           <p className="text-[11px] tracking-widest uppercase text-[#A8A8A4] mb-3">Stack tecnológico</p>
-          <h2 className="font-[family-name:var(--font-cormorant)] text-[42px] font-light leading-[1.1]">
+          <h2 className="font-[family-name:var(--font-cormorant)] text-[42px] font-light leading-[1.1] text-[#1A1A18] dark:text-white">
             <em>Herramientas</em>
           </h2>
         </div>
@@ -252,9 +240,9 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
               viewport={{ once: true }}
-              className="border border-[#1A1A18]/10 rounded-lg px-6 py-5 hover:border-[#1A1A18]/30 transition-colors"
+              className="border border-[#1A1A18]/10 dark:border-white/10 rounded-lg px-6 py-5 hover:border-[#1A1A18]/30 dark:hover:border-white/30 transition-colors"
             >
-              <p className="text-[14px] font-normal mb-1">{tool.name}</p>
+              <p className="text-[14px] font-normal mb-1 text-[#1A1A18] dark:text-white">{tool.name}</p>
               <p className="text-[11px] text-[#A8A8A4] tracking-wide">{tool.category}</p>
             </motion.div>
           ))}
@@ -262,7 +250,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="px-10 py-7 border-t border-[#1A1A18]/10 flex justify-between items-center">
+      <footer className="px-10 py-7 border-t border-[#1A1A18]/10 dark:border-white/10 flex justify-between items-center">
         <span className="text-[12px] text-[#A8A8A4] tracking-wide">© 2025 QLab</span>
         <span className="text-[12px] text-[#A8A8A4] tracking-wide">AI · Cinema · Story</span>
       </footer>
