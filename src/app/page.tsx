@@ -3,6 +3,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
+import Image from "next/image";
 import SplitText from "@/components/SplitText";
 import RotatingText from "@/components/RotatingText";
 
@@ -25,14 +26,30 @@ const proceso = [
 ];
 
 const herramientas = [
-  { name: "Kling 3", category: "Generación de video" },
-  { name: "ElevenLabs", category: "Síntesis de voz" },
-  { name: "Sync.so", category: "Lip sync" },
-  { name: "DaVinci Resolve", category: "Edición & color" },
-  { name: "Higgsfield Cinema", category: "IA cinematográfica" },
-  { name: "Claude AI", category: "Narrativa & código" },
-  { name: "Framer", category: "Diseño web" },
-  { name: "Next.js", category: "Desarrollo web" },
+  {
+    name: "Framer",
+    category: "Diseño web",
+    desc: "Creamos prototipos y webs de alta fidelidad con animaciones fluidas y diseño profesional sin escribir una sola línea de CSS.",
+    img: "/img/1.framer.png",
+  },
+  {
+    name: "Higgsfield Cinema",
+    category: "IA cinematográfica",
+    desc: "Generamos imágenes y videos con estética de cine real — iluminación, color y composición de nivel profesional usando IA.",
+    img: "/img/2.higgsfield.png",
+  },
+  {
+    name: "Claude AI",
+    category: "Narrativa & código",
+    desc: "Desarrollamos narrativas, guiones y código de producción con el modelo de IA más avanzado del mercado.",
+    img: "/img/3.claude.jpg",
+  },
+  {
+    name: "Kling 3.0",
+    category: "Generación de video",
+    desc: "Producimos video cinematográfico con IA — movimiento de cámara, personajes consistentes y calidad 4K en segundos.",
+    img: "/img/4.kling3.0.png",
+  },
 ];
 
 export default function Home() {
@@ -233,29 +250,59 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Herramientas */}
-      <section className="px-10 py-20 border-t border-[#1A1A18]/10 dark:border-white/10">
-        <div className="mb-16">
+      {/* Herramientas — layout alternado */}
+      <section className="border-t border-[#1A1A18]/10 dark:border-white/10">
+        <div className="px-10 py-20">
           <p className="text-[11px] tracking-widest uppercase text-[#A8A8A4] mb-3">Stack tecnológico</p>
-          <h2 className="text-[42px] font-black leading-[1.1] text-[#1A1A18] dark:text-white">
+          <h2 className="text-[42px] font-black leading-[1.1] text-[#1A1A18] dark:text-white mb-20">
             Herramientas
           </h2>
         </div>
-        <div className="grid grid-cols-4 gap-4">
-          {herramientas.map((tool, i) => (
-            <motion.div
-              key={tool.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              viewport={{ once: true }}
-              className="border border-[#1A1A18]/10 dark:border-white/10 rounded-lg px-6 py-5 hover:border-[#1A1A18]/30 dark:hover:border-white/30 transition-colors"
-            >
-              <p className="text-[14px] font-bold mb-1 text-[#1A1A18] dark:text-white">{tool.name}</p>
-              <p className="text-[11px] text-[#A8A8A4] tracking-wide">{tool.category}</p>
-            </motion.div>
-          ))}
-        </div>
+
+        {herramientas.map((tool, i) => (
+          <motion.div
+            key={tool.name}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
+            className={`grid grid-cols-2 border-t border-[#1A1A18]/10 dark:border-white/10 ${i % 2 === 0 ? "" : "flex-row-reverse"}`}
+          >
+            {i % 2 === 0 ? (
+              <>
+                <div className="relative aspect-[4/3] overflow-hidden bg-[#F0EEE9] dark:bg-white/5">
+                  <Image
+                    src={tool.img}
+                    alt={tool.name}
+                    fill
+                    className="object-cover hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+                <div className="flex flex-col justify-center px-16 py-16">
+                  <p className="text-[11px] tracking-widest uppercase text-[#A8A8A4] mb-4">{tool.category}</p>
+                  <h3 className="text-[42px] font-black text-[#1A1A18] dark:text-white mb-6">{tool.name}</h3>
+                  <p className="text-[14px] text-[#6B6B67] dark:text-white/50 leading-relaxed">{tool.desc}</p>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="flex flex-col justify-center px-16 py-16">
+                  <p className="text-[11px] tracking-widest uppercase text-[#A8A8A4] mb-4">{tool.category}</p>
+                  <h3 className="text-[42px] font-black text-[#1A1A18] dark:text-white mb-6">{tool.name}</h3>
+                  <p className="text-[14px] text-[#6B6B67] dark:text-white/50 leading-relaxed">{tool.desc}</p>
+                </div>
+                <div className="relative aspect-[4/3] overflow-hidden bg-[#F0EEE9] dark:bg-white/5">
+                  <Image
+                    src={tool.img}
+                    alt={tool.name}
+                    fill
+                    className="object-cover hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+              </>
+            )}
+          </motion.div>
+        ))}
       </section>
 
       {/* Footer */}
