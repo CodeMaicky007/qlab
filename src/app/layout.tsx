@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -13,15 +13,15 @@ const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
 });
 
-const dmSans = DM_Sans({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400"],
+  weight: ["300", "400", "500"],
   variable: "--font-dm-sans",
 });
 
 export const metadata: Metadata = {
-  title: "QLab — Cinematic AI Studio",
-  description: "Visual storytelling · AI Production",
+  title: "Portafolio CodeMaicky007",
+  description: "An expert of visual storytelling · AI Production",
 };
 
 export default function RootLayout({
@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html lang="en" suppressHydrationWarning>
-        <body className={`${cormorant.variable} ${dmSans.variable} font-sans bg-[#FAFAF8] text-[#1A1A18] dark:bg-[#0D0D0D] dark:text-white`}>
+        <body className={`${cormorant.variable} ${inter.variable} font-sans bg-[#FAFAF8] text-[#1A1A18] dark:bg-[#0D0D0D] dark:text-white`}>
           <ThemeProvider>
             <Nav />
             <ThemeToggle />
