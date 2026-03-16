@@ -3,6 +3,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
+import SplitText from "@/components/SplitText";
 
 const gallery = [
   "/IA/TutoyFrancesco.jpeg",
@@ -159,14 +160,11 @@ export default function Home() {
         >
           Visual storytelling · AI Production
         </motion.p>
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="font-[family-name:var(--font-cormorant)] text-[80px] font-light leading-[1.0] mb-4 text-[#1A1A18] dark:text-white"
-        >
-          Cinematic <em>AI</em> Studio
-        </motion.h1>
+
+        <h1 className="font-[family-name:var(--font-cormorant)] text-[80px] font-light leading-[1.0] mb-4 text-[#1A1A18] dark:text-white">
+        <SplitText text="Cinematic AI Studio" delay={0.08} startDelay={1.2} />
+        </h1>
+
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
