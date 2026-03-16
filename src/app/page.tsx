@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import SplitText from "@/components/SplitText";
+import RotatingText from "@/components/RotatingText";
 
 const gallery = [
   "/IA/TutoyFrancesco.jpeg",
@@ -162,7 +163,7 @@ export default function Home() {
         </motion.p>
 
         <h1 className="font-[family-name:var(--font-cormorant)] text-[80px] font-light leading-[1.0] mb-4 text-[#1A1A18] dark:text-white">
-        <SplitText text="Cinematic AI Studio" delay={0.08} startDelay={1.2} />
+          <SplitText text="Cinematic AI Studio" delay={0.08} startDelay={1.2} />
         </h1>
 
         <motion.p
@@ -196,13 +197,23 @@ export default function Home() {
 
       {/* Proceso */}
       <section className="px-10 py-20 border-t border-[#1A1A18]/10 dark:border-white/10">
-        <div className="flex justify-between items-end mb-16">
-          <div>
-            <p className="text-[11px] tracking-widest uppercase text-[#A8A8A4] mb-3">Cómo trabajamos</p>
-            <h2 className="font-[family-name:var(--font-cormorant)] text-[42px] font-light leading-[1.1] text-[#1A1A18] dark:text-white">
-              El <em>proceso</em>
-            </h2>
-          </div>
+        <div className="text-center mb-16">
+          <p className="text-[11px] tracking-widest uppercase text-[#A8A8A4] mb-4">Cómo trabajamos</p>
+          <h2 className="font-[family-name:var(--font-cormorant)] text-[48px] font-light leading-[1.1] text-[#1A1A18] dark:text-white flex items-center justify-center gap-3 flex-wrap">
+            El proceso de
+            <RotatingText
+              texts={["Concepto", "Generación", "Edición", "Entrega"]}
+              mainClassName="font-[family-name:var(--font-cormorant)] text-[48px] font-light italic text-[#1A1A18] dark:text-white overflow-hidden"
+              splitLevelClassName="overflow-hidden"
+              staggerFrom="last"
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "-120%" }}
+              staggerDuration={0.025}
+              transition={{ type: "spring", damping: 30, stiffness: 400 }}
+              rotationInterval={2000}
+            />
+          </h2>
         </div>
         <div className="grid grid-cols-4 gap-8">
           {proceso.map((step, i) => (
