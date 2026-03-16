@@ -114,7 +114,7 @@ function VideoCard({ project, index }: { project: typeof projects[0]; index: num
       </span>
 
       <div className="absolute bottom-0 left-0 right-0 p-6">
-        <h2 className="font-[family-name:var(--font-cormorant)] text-[32px] font-light text-white leading-tight mb-1">
+        <h2 className="text-[32px] font-black text-white leading-tight mb-1">
           {project.title}
         </h2>
         <p className="text-[12px] text-white/50 leading-relaxed mb-4 transition-all duration-300" style={{ opacity: hovered ? 1 : 0.6 }}>
@@ -163,7 +163,7 @@ export default function Work() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="font-[family-name:var(--font-cormorant)] text-[52px] font-light leading-[1.1] mb-10"
+          className="text-[52px] font-black leading-[1.1] mb-10"
         >
           Proyectos <em>QLab</em>
         </motion.h1>

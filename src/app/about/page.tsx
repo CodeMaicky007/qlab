@@ -28,9 +28,9 @@ export default function About() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="font-[family-name:var(--font-cormorant)] text-[80px] font-light leading-[1.0] mb-8 text-[#1A1A18] dark:text-white"
+          className="text-[80px] font-black leading-[1.0] mb-8 text-[#1A1A18] dark:text-white"
         >
-          Miguel Ángel<br /><em>Vega González</em>
+          Miguel Ángel<br />Vega González
         </motion.h1>
         <motion.p
           initial={{ opacity: 0 }}
@@ -59,7 +59,7 @@ export default function About() {
               viewport={{ once: true }}
               className="bg-white dark:bg-white/5 rounded-2xl p-8 text-center shadow-sm border border-[#1A1A18]/5 dark:border-white/10"
             >
-              <p className="font-[family-name:var(--font-cormorant)] text-[56px] font-light text-[#1A1A18] dark:text-white leading-none mb-2">{stat.num}</p>
+              <p className="text-[56px] font-black text-[#1A1A18] dark:text-white leading-none mb-2">{stat.num}</p>
               <p className="text-[12px] text-[#A8A8A4] tracking-wide">{stat.label}</p>
             </motion.div>
           ))}
@@ -76,8 +76,8 @@ export default function About() {
             viewport={{ once: true }}
           >
             <p className="text-[11px] tracking-widest uppercase text-[#A8A8A4] mb-6">Quién soy</p>
-            <h2 className="font-[family-name:var(--font-cormorant)] text-[42px] font-light leading-[1.1] text-[#1A1A18] dark:text-white mb-6">
-              Tecnología &<br /><em>narrativa visual</em>
+            <h2 className="text-[42px] font-black leading-[1.1] text-[#1A1A18] dark:text-white mb-6">
+              Tecnología &<br />narrativa visual
             </h2>
             <p className="text-[14px] text-[#6B6B67] dark:text-white/50 leading-relaxed">
               Construyo webs y produzco contenido cinematográfico con inteligencia artificial, 
@@ -124,9 +124,9 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
-            className="font-[family-name:var(--font-cormorant)] text-[48px] font-light text-center text-[#1A1A18] dark:text-white mb-16"
+            className="text-[48px] font-black text-center text-[#1A1A18] dark:text-white mb-16"
           >
-            Base <em>técnica</em>
+            Base técnica
           </motion.h2>
           <div className="grid grid-cols-2 gap-6">
             {[
@@ -149,7 +149,7 @@ export default function About() {
                 viewport={{ once: true }}
                 className="bg-white dark:bg-white/5 rounded-2xl p-8 shadow-sm border border-[#1A1A18]/5 dark:border-white/10 hover:shadow-md transition-shadow"
               >
-                <p className="text-[15px] font-normal mb-2 text-[#1A1A18] dark:text-white">{e.title}</p>
+                <p className="text-[15px] font-bold mb-2 text-[#1A1A18] dark:text-white">{e.title}</p>
                 <p className="text-[11px] text-[#A8A8A4] tracking-wide mb-4">{e.duration}</p>
                 <p className="text-[12px] text-[#6B6B67] dark:text-white/50 leading-relaxed">{e.desc}</p>
               </motion.div>
@@ -175,9 +175,9 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
-            className="font-[family-name:var(--font-cormorant)] text-[48px] font-light text-center text-[#1A1A18] dark:text-white mb-16"
+            className="text-[48px] font-black text-center text-[#1A1A18] dark:text-white mb-16"
           >
-            Stack <em>completo</em>
+            Stack completo
           </motion.h2>
           <div className="grid grid-cols-3 gap-6">
             {skills.map((block, i) => (
@@ -189,7 +189,7 @@ export default function About() {
                 viewport={{ once: true }}
                 className="bg-[#FAFAF8] dark:bg-[#0D0D0D] rounded-2xl p-6 border border-[#1A1A18]/5 dark:border-white/10 hover:border-[#1A1A18]/20 dark:hover:border-white/20 transition-colors"
               >
-                <p className="text-[13px] font-normal mb-4 text-[#1A1A18] dark:text-white">{block.area}</p>
+                <p className="text-[13px] font-bold mb-4 text-[#1A1A18] dark:text-white">{block.area}</p>
                 <ul className="flex flex-col gap-2">
                   {block.items.map((s) => (
                     <li key={s} className="text-[12px] text-[#6B6B67] dark:text-white/50 flex items-center gap-2">
@@ -221,9 +221,9 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
-            className="font-[family-name:var(--font-cormorant)] text-[48px] font-light text-center text-[#1A1A18] dark:text-white mb-16"
+            className="text-[48px] font-black text-center text-[#1A1A18] dark:text-white mb-16"
           >
-            Lo que me <em>mueve</em>
+            Lo que me mueve
           </motion.h2>
           <div className="grid grid-cols-2 gap-8">
             {[
@@ -244,7 +244,7 @@ export default function About() {
                 viewport={{ once: true }}
                 className="bg-white dark:bg-white/5 rounded-2xl p-10 shadow-sm border border-[#1A1A18]/5 dark:border-white/10 hover:shadow-md transition-shadow"
               >
-                <p className="font-[family-name:var(--font-cormorant)] text-[32px] font-light mb-4 text-[#1A1A18] dark:text-white">{item.title}</p>
+                <p className="text-[32px] font-black mb-4 text-[#1A1A18] dark:text-white">{item.title}</p>
                 <p className="text-[13px] text-[#6B6B67] dark:text-white/50 leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}

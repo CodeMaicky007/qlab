@@ -152,7 +152,7 @@ export default function Home() {
     <main className="font-[family-name:var(--font-dm-sans)] bg-[#FAFAF8] dark:bg-[#0D0D0D] transition-colors duration-300" style={{ minHeight: "200vh" }}>
 
       {/* Hero */}
-      <section className="flex flex-col items-center justify-center text-center px-10 pt-32 pb-4">
+      <section className="flex flex-col items-center justify-center text-center px-10 pt-44 pb-4">
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -162,7 +162,7 @@ export default function Home() {
           Visual storytelling · AI Production
         </motion.p>
 
-        <h1 className="font-[family-name:var(--font-cormorant)] text-[80px] font-light leading-[1.0] mb-4 text-[#1A1A18] dark:text-white">
+        <h1 className="text-[80px] font-black leading-[1.0] mb-4 text-[#1A1A18] dark:text-white">
           <SplitText text="Cinematic AI Studio" delay={0.08} startDelay={1.2} />
         </h1>
 
@@ -199,11 +199,11 @@ export default function Home() {
       <section className="px-10 py-20 border-t border-[#1A1A18]/10 dark:border-white/10">
         <div className="text-center mb-16">
           <p className="text-[11px] tracking-widest uppercase text-[#A8A8A4] mb-4">Cómo trabajamos</p>
-          <h2 className="font-[family-name:var(--font-cormorant)] text-[48px] font-light leading-[1.1] text-[#1A1A18] dark:text-white flex items-center justify-center gap-3 flex-wrap">
+          <h2 className="text-[48px] font-black leading-[1.1] text-[#1A1A18] dark:text-white flex items-center justify-center gap-3 flex-wrap">
             El proceso de
             <RotatingText
               texts={["Concepto", "Generación", "Edición", "Entrega"]}
-              mainClassName="font-[family-name:var(--font-cormorant)] text-[48px] font-light italic text-[#1A1A18] dark:text-white overflow-hidden"
+              mainClassName="text-[48px] font-black italic text-[#1A1A18] dark:text-white overflow-hidden"
               splitLevelClassName="overflow-hidden"
               staggerFrom="last"
               initial={{ y: "100%" }}
@@ -226,7 +226,7 @@ export default function Home() {
               className="border-t border-[#1A1A18]/10 dark:border-white/10 pt-6"
             >
               <p className="text-[11px] tracking-widest text-[#A8A8A4] mb-4">{step.num}</p>
-              <h3 className="font-[family-name:var(--font-cormorant)] text-[24px] font-light mb-3 text-[#1A1A18] dark:text-white">{step.title}</h3>
+              <h3 className="text-[24px] font-bold mb-3 text-[#1A1A18] dark:text-white">{step.title}</h3>
               <p className="text-[12px] text-[#6B6B67] dark:text-white/50 leading-relaxed">{step.desc}</p>
             </motion.div>
           ))}
@@ -237,8 +237,8 @@ export default function Home() {
       <section className="px-10 py-20 border-t border-[#1A1A18]/10 dark:border-white/10">
         <div className="mb-16">
           <p className="text-[11px] tracking-widest uppercase text-[#A8A8A4] mb-3">Stack tecnológico</p>
-          <h2 className="font-[family-name:var(--font-cormorant)] text-[42px] font-light leading-[1.1] text-[#1A1A18] dark:text-white">
-            <em>Herramientas</em>
+          <h2 className="text-[42px] font-black leading-[1.1] text-[#1A1A18] dark:text-white">
+            Herramientas
           </h2>
         </div>
         <div className="grid grid-cols-4 gap-4">
@@ -251,7 +251,7 @@ export default function Home() {
               viewport={{ once: true }}
               className="border border-[#1A1A18]/10 dark:border-white/10 rounded-lg px-6 py-5 hover:border-[#1A1A18]/30 dark:hover:border-white/30 transition-colors"
             >
-              <p className="text-[14px] font-normal mb-1 text-[#1A1A18] dark:text-white">{tool.name}</p>
+              <p className="text-[14px] font-bold mb-1 text-[#1A1A18] dark:text-white">{tool.name}</p>
               <p className="text-[11px] text-[#A8A8A4] tracking-wide">{tool.category}</p>
             </motion.div>
           ))}
