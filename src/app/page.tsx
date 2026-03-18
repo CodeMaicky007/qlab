@@ -3,7 +3,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
-import Image from "next/image";
 import SplitText from "@/components/SplitText";
 import RotatingText from "@/components/RotatingText";
 
@@ -29,26 +28,31 @@ const herramientas = [
   {
     name: "Framer",
     category: "Diseño web",
-    desc: "Creamos prototipos y webs de alta fidelidad con animaciones fluidas y diseño profesional sin escribir una sola línea de CSS.",
+    desc: "Webs de alta fidelidad con animaciones fluidas.",
     img: "/img/1.framer.png",
+    // ocupa 2 columnas arriba a la izquierda
+    gridClass: "col-span-2 row-span-1",
   },
   {
-    name: "Higgsfield Cinema",
+    name: "Higgsfield",
     category: "IA cinematográfica",
-    desc: "Generamos imágenes y videos con estética de cine real — iluminación, color y composición de nivel profesional usando IA.",
+    desc: "Imágenes y videos con estética de cine real.",
     img: "/img/2.higgsfield.png",
+    gridClass: "col-span-1 row-span-2",
   },
   {
     name: "Claude AI",
     category: "Narrativa & código",
-    desc: "Desarrollamos narrativas, guiones y código de producción con el modelo de IA más avanzado del mercado.",
+    desc: "Narrativas, guiones y código con el mejor modelo del mercado.",
     img: "/img/3.claude.jpg",
+    gridClass: "col-span-1 row-span-1",
   },
   {
     name: "Kling 3.0",
     category: "Generación de video",
-    desc: "Producimos video cinematográfico con IA — movimiento de cámara, personajes consistentes y calidad 4K en segundos.",
+    desc: "Video cinematográfico 4K con IA en segundos.",
     img: "/img/4.kling3.0.png",
+    gridClass: "col-span-2 row-span-1",
   },
 ];
 
@@ -211,8 +215,6 @@ export default function Home() {
       />
 
       {/* ── PROCESO ── */}
-
-      {/* Intro proceso */}
       <section
         style={{ minHeight: "100vh" }}
         className="flex flex-col items-center justify-center px-10 text-center border-t border-[#1A1A18]/10 dark:border-white/10 bg-[#FAFAF8] dark:bg-[#0D0D0D]"
@@ -249,7 +251,6 @@ export default function Home() {
         </motion.h2>
       </section>
 
-      {/* Pasos del proceso — todos blancos */}
       {proceso.map((step, i) => (
         <section
           key={step.num}
@@ -278,77 +279,115 @@ export default function Home() {
         </section>
       ))}
 
-      {/* ── HERRAMIENTAS ── */}
+      {/* ── HERRAMIENTAS — BENTO ── */}
+      <section className="border-t border-[#1A1A18]/10 dark:border-white/10 bg-[#FAFAF8] dark:bg-[#0D0D0D] px-8 py-24">
 
-      {/* Intro herramientas */}
-      <section
-        style={{ minHeight: "100vh" }}
-        className="flex flex-col items-center justify-center px-10 text-center border-t border-[#1A1A18]/10 dark:border-white/10 bg-[#FAFAF8] dark:bg-[#0D0D0D]"
-      >
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-[11px] tracking-widest uppercase text-[#A8A8A4] mb-6"
+        {/* Header */}
+        <div className="text-center mb-16">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-[11px] tracking-widest uppercase text-[#A8A8A4] mb-4"
+          >
+            Stack tecnológico
+          </motion.p>
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="text-[64px] font-black text-[#1A1A18] dark:text-white"
+          >
+            Herramientas
+          </motion.h2>
+        </div>
+
+        {/* Bento Grid */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gridTemplateRows: "340px 340px",
+            gap: "12px",
+            maxWidth: "1200px",
+            margin: "0 auto",
+          }}
         >
-          Stack tecnológico
-        </motion.p>
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-          viewport={{ once: true }}
-          className="text-[64px] font-black text-[#1A1A18] dark:text-white"
-        >
-          Herramientas
-        </motion.h2>
+          {herramientas.map((tool, i) => (
+            <motion.div
+              key={tool.name}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              viewport={{ once: true }}
+              className={tool.gridClass}
+              style={{
+                borderRadius: "20px",
+                overflow: "hidden",
+                position: "relative",
+                border: "1px solid rgba(26,26,24,0.08)",
+                cursor: "pointer",
+              }}
+            >
+              {/* Imagen de fondo */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={tool.img}
+                alt={tool.name}
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  transition: "transform 0.6s cubic-bezier(0.76, 0, 0.24, 1)",
+                }}
+                className="bento-img"
+              />
+
+              {/* Overlay degradado */}
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.1) 50%, transparent 100%)",
+                  zIndex: 1,
+                }}
+              />
+
+              {/* Texto sobre la imagen */}
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  padding: "28px",
+                  zIndex: 2,
+                }}
+              >
+                <p style={{ fontSize: "10px", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.5)", marginBottom: "6px" }}>
+                  {tool.category}
+                </p>
+                <h3 style={{ fontSize: "22px", fontWeight: 900, color: "white", marginBottom: "6px", lineHeight: 1.1 }}>
+                  {tool.name}
+                </h3>
+                <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.6)", lineHeight: 1.5 }}>
+                  {tool.desc}
+                </p>
+              </div>
+
+              {/* Hover scale en imagen */}
+              <style>{`
+                .bento-img { transform: scale(1); }
+                *:hover > .bento-img { transform: scale(1.05); }
+              `}</style>
+            </motion.div>
+          ))}
+        </div>
       </section>
-
-      {/* Cada herramienta — todas blancas */}
-      {herramientas.map((tool, i) => (
-        <section
-          key={tool.name}
-          style={{ minHeight: "100vh" }}
-          className="grid grid-cols-2 bg-[#FAFAF8] dark:bg-[#0D0D0D] border-t border-[#1A1A18]/10 dark:border-white/10"
-        >
-          {i % 2 === 0 ? (
-            <>
-              <div className="relative overflow-hidden">
-                <Image src={tool.img} alt={tool.name} fill className="object-cover" />
-              </div>
-              <motion.div
-                initial={{ opacity: 0, x: 40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7 }}
-                viewport={{ once: true }}
-                className="flex flex-col justify-center px-16"
-              >
-                <p className="text-[11px] tracking-widest uppercase mb-4 text-[#A8A8A4]">{tool.category}</p>
-                <h3 className="text-[52px] font-black mb-6 text-[#1A1A18] dark:text-white">{tool.name}</h3>
-                <p className="text-[15px] leading-relaxed text-[#6B6B67] dark:text-white/50">{tool.desc}</p>
-              </motion.div>
-            </>
-          ) : (
-            <>
-              <motion.div
-                initial={{ opacity: 0, x: -40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7 }}
-                viewport={{ once: true }}
-                className="flex flex-col justify-center px-16"
-              >
-                <p className="text-[11px] tracking-widest uppercase mb-4 text-[#A8A8A4]">{tool.category}</p>
-                <h3 className="text-[52px] font-black mb-6 text-[#1A1A18] dark:text-white">{tool.name}</h3>
-                <p className="text-[15px] leading-relaxed text-[#6B6B67] dark:text-white/50">{tool.desc}</p>
-              </motion.div>
-              <div className="relative overflow-hidden">
-                <Image src={tool.img} alt={tool.name} fill className="object-cover" />
-              </div>
-            </>
-          )}
-        </section>
-      ))}
 
       {/* ── FOOTER ── */}
       <footer className="px-10 py-7 border-t border-[#1A1A18]/10 dark:border-white/10 flex justify-between items-center bg-[#FAFAF8] dark:bg-[#0D0D0D]">
