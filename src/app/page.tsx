@@ -166,9 +166,9 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="font-[family-name:var(--font-dm-sans)] bg-[#FAFAF8] dark:bg-[#0D0D0D] transition-colors duration-300" style={{ minHeight: "200vh" }}>
+    <main className="font-[family-name:var(--font-dm-sans)] bg-[#FAFAF8] dark:bg-[#0D0D0D] transition-colors duration-300">
 
-      {/* Hero */}
+      {/* ── HERO ── */}
       <section className="flex flex-col items-center justify-center text-center px-10 pt-44 pb-4">
         <motion.p
           initial={{ opacity: 0, y: 10 }}
@@ -178,11 +178,9 @@ export default function Home() {
         >
           Visual storytelling · AI Production
         </motion.p>
-
         <h1 className="text-[80px] font-black leading-[1.0] mb-4 text-[#1A1A18] dark:text-white">
           <SplitText text="Cinematic AI Studio" delay={0.08} startDelay={1.2} />
         </h1>
-
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -205,108 +203,155 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Canvas Three.js */}
+      {/* ── CARRUSEL 3D ── */}
       <div
         ref={containerRef}
         className="w-full relative"
         style={{ height: "70vh", overflow: "visible" }}
       />
 
-      {/* Proceso */}
-      <section className="px-10 py-20 border-t border-[#1A1A18]/10 dark:border-white/10">
-        <div className="text-center mb-16">
-          <p className="text-[11px] tracking-widest uppercase text-[#A8A8A4] mb-4">Cómo trabajamos</p>
-          <h2 className="text-[48px] font-black leading-[1.1] text-[#1A1A18] dark:text-white flex items-center justify-center gap-3 flex-wrap">
-            El proceso de
-            <RotatingText
-              texts={["Concepto", "Generación", "Edición", "Entrega"]}
-              mainClassName="text-[48px] font-black italic text-[#1A1A18] dark:text-white overflow-hidden"
-              splitLevelClassName="overflow-hidden"
-              staggerFrom="last"
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "-120%" }}
-              staggerDuration={0.025}
-              transition={{ type: "spring", damping: 30, stiffness: 400 }}
-              rotationInterval={2000}
-            />
-          </h2>
-        </div>
-        <div className="grid grid-cols-4 gap-8">
-          {proceso.map((step, i) => (
-            <motion.div
-              key={step.num}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              viewport={{ once: true }}
-              className="border-t border-[#1A1A18]/10 dark:border-white/10 pt-6"
-            >
-              <p className="text-[11px] tracking-widest text-[#A8A8A4] mb-4">{step.num}</p>
-              <h3 className="text-[24px] font-bold mb-3 text-[#1A1A18] dark:text-white">{step.title}</h3>
-              <p className="text-[12px] text-[#6B6B67] dark:text-white/50 leading-relaxed">{step.desc}</p>
-            </motion.div>
-          ))}
-        </div>
+      {/* ── PROCESO ── */}
+
+      {/* Intro proceso */}
+      <section
+        style={{ minHeight: "100vh" }}
+        className="flex flex-col items-center justify-center px-10 text-center border-t border-[#1A1A18]/10 dark:border-white/10 bg-[#FAFAF8] dark:bg-[#0D0D0D]"
+      >
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-[11px] tracking-widest uppercase text-[#A8A8A4] mb-6"
+        >
+          Cómo trabajamos
+        </motion.p>
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          viewport={{ once: true }}
+          className="text-[64px] font-black leading-[1.0] text-[#1A1A18] dark:text-white flex items-center gap-4 flex-wrap justify-center"
+        >
+          El proceso de
+          <RotatingText
+            texts={["Concepto", "Generación", "Edición", "Entrega"]}
+            mainClassName="text-[64px] font-black italic text-[#1A1A18] dark:text-white overflow-hidden"
+            splitLevelClassName="overflow-hidden"
+            staggerFrom="last"
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "-120%" }}
+            staggerDuration={0.025}
+            transition={{ type: "spring", damping: 30, stiffness: 400 }}
+            rotationInterval={2000}
+          />
+        </motion.h2>
       </section>
 
-      {/* Herramientas — layout alternado */}
-      <section className="border-t border-[#1A1A18]/10 dark:border-white/10">
-        <div className="px-10 py-20">
-          <p className="text-[11px] tracking-widest uppercase text-[#A8A8A4] mb-3">Stack tecnológico</p>
-          <h2 className="text-[42px] font-black leading-[1.1] text-[#1A1A18] dark:text-white mb-20">
-            Herramientas
-          </h2>
-        </div>
-
-        {herramientas.map((tool, i) => (
+      {/* Pasos del proceso — todos blancos */}
+      {proceso.map((step, i) => (
+        <section
+          key={step.num}
+          style={{ minHeight: "100vh" }}
+          className={`flex items-center px-20 border-t border-[#1A1A18]/10 dark:border-white/10 bg-[#FAFAF8] dark:bg-[#0D0D0D] ${
+            i % 2 === 0 ? "justify-start" : "justify-end"
+          }`}
+        >
           <motion.div
-            key={tool.name}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
             viewport={{ once: true }}
-            className={`grid grid-cols-2 border-t border-[#1A1A18]/10 dark:border-white/10 ${i % 2 === 0 ? "" : "flex-row-reverse"}`}
+            className="max-w-xl"
           >
-            {i % 2 === 0 ? (
-              <>
-                <div className="relative aspect-[4/3] overflow-hidden bg-[#F0EEE9] dark:bg-white/5">
-                  <Image
-                    src={tool.img}
-                    alt={tool.name}
-                    fill
-                    className="object-cover hover:scale-105 transition-transform duration-700"
-                  />
-                </div>
-                <div className="flex flex-col justify-center px-16 py-16">
-                  <p className="text-[11px] tracking-widest uppercase text-[#A8A8A4] mb-4">{tool.category}</p>
-                  <h3 className="text-[42px] font-black text-[#1A1A18] dark:text-white mb-6">{tool.name}</h3>
-                  <p className="text-[14px] text-[#6B6B67] dark:text-white/50 leading-relaxed">{tool.desc}</p>
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="flex flex-col justify-center px-16 py-16">
-                  <p className="text-[11px] tracking-widest uppercase text-[#A8A8A4] mb-4">{tool.category}</p>
-                  <h3 className="text-[42px] font-black text-[#1A1A18] dark:text-white mb-6">{tool.name}</h3>
-                  <p className="text-[14px] text-[#6B6B67] dark:text-white/50 leading-relaxed">{tool.desc}</p>
-                </div>
-                <div className="relative aspect-[4/3] overflow-hidden bg-[#F0EEE9] dark:bg-white/5">
-                  <Image
-                    src={tool.img}
-                    alt={tool.name}
-                    fill
-                    className="object-cover hover:scale-105 transition-transform duration-700"
-                  />
-                </div>
-              </>
-            )}
+            <p className="text-[11px] tracking-widest uppercase mb-6 text-[#A8A8A4]">
+              {step.num}
+            </p>
+            <h3 className="text-[72px] font-black leading-[1.0] mb-6 text-[#1A1A18] dark:text-white">
+              {step.title}
+            </h3>
+            <p className="text-[16px] leading-relaxed text-[#6B6B67] dark:text-white/50">
+              {step.desc}
+            </p>
           </motion.div>
-        ))}
+        </section>
+      ))}
+
+      {/* ── HERRAMIENTAS ── */}
+
+      {/* Intro herramientas */}
+      <section
+        style={{ minHeight: "100vh" }}
+        className="flex flex-col items-center justify-center px-10 text-center border-t border-[#1A1A18]/10 dark:border-white/10 bg-[#FAFAF8] dark:bg-[#0D0D0D]"
+      >
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-[11px] tracking-widest uppercase text-[#A8A8A4] mb-6"
+        >
+          Stack tecnológico
+        </motion.p>
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          viewport={{ once: true }}
+          className="text-[64px] font-black text-[#1A1A18] dark:text-white"
+        >
+          Herramientas
+        </motion.h2>
       </section>
 
-      {/* Footer */}
-      <footer className="px-10 py-7 border-t border-[#1A1A18]/10 dark:border-white/10 flex justify-between items-center">
+      {/* Cada herramienta — todas blancas */}
+      {herramientas.map((tool, i) => (
+        <section
+          key={tool.name}
+          style={{ minHeight: "100vh" }}
+          className="grid grid-cols-2 bg-[#FAFAF8] dark:bg-[#0D0D0D] border-t border-[#1A1A18]/10 dark:border-white/10"
+        >
+          {i % 2 === 0 ? (
+            <>
+              <div className="relative overflow-hidden">
+                <Image src={tool.img} alt={tool.name} fill className="object-cover" />
+              </div>
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7 }}
+                viewport={{ once: true }}
+                className="flex flex-col justify-center px-16"
+              >
+                <p className="text-[11px] tracking-widest uppercase mb-4 text-[#A8A8A4]">{tool.category}</p>
+                <h3 className="text-[52px] font-black mb-6 text-[#1A1A18] dark:text-white">{tool.name}</h3>
+                <p className="text-[15px] leading-relaxed text-[#6B6B67] dark:text-white/50">{tool.desc}</p>
+              </motion.div>
+            </>
+          ) : (
+            <>
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7 }}
+                viewport={{ once: true }}
+                className="flex flex-col justify-center px-16"
+              >
+                <p className="text-[11px] tracking-widest uppercase mb-4 text-[#A8A8A4]">{tool.category}</p>
+                <h3 className="text-[52px] font-black mb-6 text-[#1A1A18] dark:text-white">{tool.name}</h3>
+                <p className="text-[15px] leading-relaxed text-[#6B6B67] dark:text-white/50">{tool.desc}</p>
+              </motion.div>
+              <div className="relative overflow-hidden">
+                <Image src={tool.img} alt={tool.name} fill className="object-cover" />
+              </div>
+            </>
+          )}
+        </section>
+      ))}
+
+      {/* ── FOOTER ── */}
+      <footer className="px-10 py-7 border-t border-[#1A1A18]/10 dark:border-white/10 flex justify-between items-center bg-[#FAFAF8] dark:bg-[#0D0D0D]">
         <span className="text-[12px] text-[#A8A8A4] tracking-wide">© 2025 QLab</span>
         <span className="text-[12px] text-[#A8A8A4] tracking-wide">AI · Cinema · Story</span>
       </footer>
